@@ -1,0 +1,42 @@
+feature create-stats-table -m tdbacen.riesgos_statistics_metadata -e
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_status --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c cb_person_default_on_file_0 --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c cb_person_default_on_file_1 --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c cb_person_default_on_file_other  --debug
+
+
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_0  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_1  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_2  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_3   --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_4  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_5  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_6  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_grade_other  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_intent_0  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_intent_1  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_intent_2 --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_intent_3  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_intent_4  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_intent_5  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c loan_intent_other  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c person_home_ownership_0  --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c person_home_ownership_1 --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c person_home_ownership_2 --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c person_home_ownership_3 --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t categorical -c person_home_ownership_other --debug
+
+
+
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t continuous -c cb_person_cred_hist_length --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t continuous -c loan_amnt --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t continuous -c loan_int_rate --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t continuous -c loan_percent_income --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t continuous -c person_age --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t continuous -c person_emp_length --debug
+tmo feature compute-stats  -s tdbacen.CreditRisk_dataset  -m tdbacen.riesgos_statistics_metadata  -t continuous -c person_income --debug
+
+
+continuous
+
+"cb_person_default_on_file_0", "cb_person_default_on_file_1", "cb_person_default_on_file_other", "loan_grade_0", "loan_grade_1", "loan_grade_2", "loan_grade_3", "loan_grade_4","loan_grade_5", "loan_grade_6", "loan_grade_other", "loan_intent_0", "loan_intent_1", "loan_intent_2", "loan_intent_3", "loan_intent_4", "loan_intent_5", "loan_intent_other", "person_home_ownership_0", "person_home_ownership_1", "person_home_ownership_2", "person_home_ownership_3", "person_home_ownership_other", "cb_person_cred_hist_length", "loan_amnt", "loan_int_rate", "loan_percent_income", "person_age", "person_emp_length", "person_income"

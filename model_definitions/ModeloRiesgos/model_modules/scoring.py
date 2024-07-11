@@ -53,7 +53,7 @@ def score(context: ModelContext, **kwargs):
     # add job_id column so we know which execution this is from if appended to predictions table
     predictions_pdf["job_id"] = context.job_id
 
-    # teradataml doesn't match column names on append.. and so to match / use same table schema as for byom predict
+    # teradataml doesn"t match column names on append.. and so to match / use same table schema as for byom predict
     # example (see README.md), we must add empty json_report column and change column order manually (v17.0.0.4)
     # CREATE MULTISET TABLE pima_patient_predictions
     # (
@@ -76,13 +76,21 @@ def score(context: ModelContext, **kwargs):
     )
     
     print("Saved predictions in Teradata")
+    print({context.dataset_info.get_predictions_metadata_fqtn()} )
+    print({context.job_id})
+    qry = f"""
+        SELECT 
+            * 
+        FROM {context.dataset_info.get_predictions_metadata_fqtn()} 
+            WHERE job_id = "{context.job_id}"
+    """
+    print(qry)
+    #calculate stats
+    predictions_df = DataFrame.from_query(f"""
+        SELECT 
+            * 
+        FROM {context.dataset_info.get_predictions_metadata_fqtn()} 
+            WHERE job_id = '{context.job_id}'
+    """)
 
-    # calculate stats
-    #predictions_df = DataFrame.from_query(f"""
-    #    SELECT 
-    #        * 
-    #    FROM {context.dataset_info.get_predictions_metadata_fqtn()} 
-    #        WHERE job_id = '{context.job_id}'
-    #""")
-
-    #record_scoring_stats(features_df=features_tdf, predicted_df=predictions_df, context=context)
+    record_scoring_stats(features_df=features_tdf, predicted_df=predictions_df, context=context)

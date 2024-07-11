@@ -17,7 +17,7 @@ def plot_feature_importance(fi, img_filename):
     import pandas as pd
     import matplotlib.pyplot as plt
     feat_importances = pd.Series(fi)
-    feat_importances.nlargest(10).plot(kind='barh').set_title('Feature Importance')
+    feat_importances.nlargest(10).plot(kind="barh").set_title("Feature Importance")
     fig = plt.gcf()
     fig.savefig(img_filename, dpi=500)
     plt.clf()
@@ -40,7 +40,7 @@ def train(context: ModelContext, **kwargs):
     #    target_columns = feature_names,
     #    scale_method = context.hyperparams["scale_method"],
     #    miss_value = context.hyperparams["miss_value"],
-    #    global_scale = context.hyperparams["global_scale"].lower() in ['true', '1'],
+    #    global_scale = context.hyperparams["global_scale"].lower() in ["true", "1"],
     #    multiplier = context.hyperparams["multiplier"],
     #    intercept = context.hyperparams["intercept"]
     #)
@@ -72,26 +72,29 @@ def train(context: ModelContext, **kwargs):
     print("Saved trained model xyz")
 
     # Calculate feature importance and generate plot
-   
-    model_pdf = model.result.to_pandas()[['predictor','estimate']]
+    
+    model_pdf = model.result.to_pandas()[["predictor","estimate"]]
     predictor_dict = {}
     
     for index, row in model_pdf.iterrows():
-        if row['predictor'] in feature_names:
-            value = row['estimate']
-            predictor_dict[row['predictor']] = value
+        if row["predictor"] in feature_names:
+            value = row["estimate"]
+            predictor_dict[row["predictor"]] = value
     
     feature_importance = dict(sorted(predictor_dict.items(), key=lambda x: x[1], reverse=True))
     keys, values = zip(*feature_importance.items())
+    print(values-np.min(values))
+    print(np.max(values))
+    
     norm_values = (values-np.min(values))/(np.max(values)-np.min(values))
     feature_importance = {keys[i]: float(norm_values[i]*1000) for i in range(len(keys))}
     plot_feature_importance(feature_importance, f"{context.artifact_output_path}/feature_importance")
 
-    record_training_stats(
-        train_df,
-        features=feature_names,
-        targets=[target_name],
-        categorical=[target_name],
-        feature_importance=feature_importance,
-        context=context
-    )
+    #record_training_stats(
+    #    train_df,
+    #    features=feature_names,
+    #    targets=[target_name],
+    #    categorical=[target_name],
+    #    feature_importance=feature_importance,
+    #    context=context
+    #)

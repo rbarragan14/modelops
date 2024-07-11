@@ -23,7 +23,7 @@ def plot_feature_importance(fi, img_filename):
     import pandas as pd
     import matplotlib.pyplot as plt
     feat_importances = pd.Series(fi)
-    feat_importances.nlargest(10).plot(kind='barh').set_title('Feature Importance')
+    feat_importances.nlargest(10).plot(kind="barh").set_title("Feature Importance")
     fig = plt.gcf()
     fig.savefig(img_filename, dpi=500)
     plt.clf()
@@ -35,10 +35,10 @@ def plot_confusion_matrix(cf, img_filename):
     ax.matshow(cf, cmap=plt.cm.Blues, alpha=0.3)
     for i in range(cf.shape[0]):
         for j in range(cf.shape[1]):
-            ax.text(x=j, y=i,s=cf[i, j], va='center', ha='center', size='xx-large')
-    ax.set_xlabel('Predicted labels');
-    ax.set_ylabel('True labels'); 
-    ax.set_title('Confusion Matrix');
+            ax.text(x=j, y=i,s=cf[i, j], va="center", ha="center", size="xx-large")
+    ax.set_xlabel("Predicted labels");
+    ax.set_ylabel("True labels"); 
+    ax.set_title("Confusion Matrix");
     fig = plt.gcf()
     fig.savefig(img_filename, dpi=500)
     plt.clf()
@@ -46,15 +46,15 @@ def plot_confusion_matrix(cf, img_filename):
     
 def plot_roc_curve(roc_out, img_filename):
     import matplotlib.pyplot as plt
-    auc = roc_out.result.to_pandas().reset_index()['AUC'][0]
+    auc = roc_out.result.to_pandas().reset_index()["AUC"][0]
     roc_results = roc_out.output_data.to_pandas()
-    plt.plot(roc_results['fpr'], roc_results['tpr'], color='darkorange', lw=2, label='ROC curve (AUC = %0.2f)' % 0.27)
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.plot(roc_results["fpr"], roc_results["tpr"], color="darkorange", lw=2, label="ROC curve (AUC = %0.2f)" % 0.27)
+    plt.plot([0, 1], [0, 1], color="navy", lw=2, linestyle="--")
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.title("Receiver Operating Characteristic (ROC) Curve")
     plt.legend(loc="lower right")
     fig = plt.gcf()
     fig.savefig(img_filename, dpi=500)
@@ -91,60 +91,60 @@ def evaluate(context: ModelContext, **kwargs):
         accumulate=target_name,
         id_column=entity_key,
         output_prob=True,
-        output_responses=['0','1']
+        output_responses=["0","1"]
     )
 
     predicted_data = ConvertTo(
         data = predictions.result,
-        target_columns = [target_name,'prediction'],
+        target_columns = [target_name,"prediction"],
         target_datatype = ["INTEGER"]
     )
 
     ClassificationEvaluator_obj = ClassificationEvaluator(
         data=predicted_data.result,
         observation_column=target_name,
-        prediction_column='prediction',
+        prediction_column="prediction",
         num_labels=2
     )
 
     metrics_pd = ClassificationEvaluator_obj.output_data.to_pandas()
 
     evaluation = {
-        'Accuracy': '{:.2f}'.format(metrics_pd.MetricValue[0]),
-        'Micro-Precision': '{:.2f}'.format(metrics_pd.MetricValue[1]),
-        'Micro-Recall': '{:.2f}'.format(metrics_pd.MetricValue[2]),
-        'Micro-F1': '{:.2f}'.format(metrics_pd.MetricValue[3]),
-        'Macro-Precision': '{:.2f}'.format(metrics_pd.MetricValue[4]),
-        'Macro-Recall': '{:.2f}'.format(metrics_pd.MetricValue[5]),
-        'Macro-F1': '{:.2f}'.format(metrics_pd.MetricValue[6]),
-        'Weighted-Precision': '{:.2f}'.format(metrics_pd.MetricValue[7]),
-        'Weighted-Recall': '{:.2f}'.format(metrics_pd.MetricValue[8]),
-        'Weighted-F1': '{:.2f}'.format(metrics_pd.MetricValue[9]),
+        "Accuracy": "{:.2f}".format(metrics_pd.MetricValue[0]),
+        "Micro-Precision": "{:.2f}".format(metrics_pd.MetricValue[1]),
+        "Micro-Recall": "{:.2f}".format(metrics_pd.MetricValue[2]),
+        "Micro-F1": "{:.2f}".format(metrics_pd.MetricValue[3]),
+        "Macro-Precision": "{:.2f}".format(metrics_pd.MetricValue[4]),
+        "Macro-Recall": "{:.2f}".format(metrics_pd.MetricValue[5]),
+        "Macro-F1": "{:.2f}".format(metrics_pd.MetricValue[6]),
+        "Weighted-Precision": "{:.2f}".format(metrics_pd.MetricValue[7]),
+        "Weighted-Recall": "{:.2f}".format(metrics_pd.MetricValue[8]),
+        "Weighted-F1": "{:.2f}".format(metrics_pd.MetricValue[9]),
     }
 
     with open(f"{context.artifact_output_path}/metrics.json", "w+") as f:
         json.dump(evaluation, f)
         
-    cm = confusion_matrix(predicted_data.result.to_pandas()['loan_status'], predicted_data.result.to_pandas()['prediction'])
+    cm = confusion_matrix(predicted_data.result.to_pandas()["loan_status"], predicted_data.result.to_pandas()["prediction"])
     plot_confusion_matrix(cm, f"{context.artifact_output_path}/confusion_matrix")
 
     #roc_out = ROC(
     #    data=predictions.result,
-    #    probability_column='prob_1',
+    #    probability_column="prob_1",
     #    observation_column=target_name,
-    #    positive_class='1',
+    #    positive_class="1",
     #    num_thresholds=1000
     #)
     #plot_roc_curve(roc_out, f"{context.artifact_output_path}/roc_curve")
 
     # Calculate feature importance and generate plot
-    model_pdf = model.to_pandas()[['predictor','estimate']]
+    model_pdf = model.to_pandas()[["predictor","estimate"]]
     predictor_dict = {}
     
     for index, row in model_pdf.iterrows():
-        if row['predictor'] in feature_names:
-            value = row['estimate']
-            predictor_dict[row['predictor']] = value
+        if row["predictor"] in feature_names:
+            value = row["estimate"]
+            predictor_dict[row["predictor"]] = value
     
     feature_importance = dict(sorted(predictor_dict.items(), key=lambda x: x[1], reverse=True))
     keys, values = zip(*feature_importance.items())
