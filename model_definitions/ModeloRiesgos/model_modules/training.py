@@ -92,11 +92,11 @@ def train(context: ModelContext, **kwargs):
     print(feature_importance)
     print(context)
     
-    record_training_stats(
-        train_df,
-        features=feature_names,
-        targets=[target_name],
-        categorical=[target_name],
-        feature_importance=feature_importance,
-        context=context
-    )
+    #record_training_stats(
+    #    train_df,
+    #    features=feature_names,
+    #    targets=[target_name],
+    #    categorical=[target_name],
+    #    feature_importance=feature_importance,
+    #    context=context
+    #)
