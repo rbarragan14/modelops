@@ -40,7 +40,9 @@ def score(context: ModelContext, **kwargs):
         object=model,
         #newdata=scaled_features.result,
         newdata=features_tdf,
-        id_column=entity_key
+        id_column=entity_key,
+        output_prob=True, 
+        output_responses='1'
     )
 
     predictions_pdf = predictions.result.to_pandas(all_rows=True).rename(columns={"prediction": target_name}).astype(int)
@@ -78,13 +80,7 @@ def score(context: ModelContext, **kwargs):
     print("Saved predictions in Teradata")
     print({context.dataset_info.get_predictions_metadata_fqtn()} )
     print({context.job_id})
-    qry = f"""
-        SELECT 
-            * 
-        FROM {context.dataset_info.get_predictions_metadata_fqtn()} 
-            WHERE job_id = "{context.job_id}"
-    """
-    print(qry)
+
     #calculate stats
     predictions_df = DataFrame.from_query(f"""
         SELECT 
