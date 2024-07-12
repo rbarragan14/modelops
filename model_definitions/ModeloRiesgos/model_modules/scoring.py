@@ -50,8 +50,10 @@ def score(context: ModelContext, **kwargs):
     print("Finished Scoring")
 
     # store the predictions
+    
     predictions_pdf = pd.DataFrame(predictions_pdf, columns=[target_name])
     predictions_pdf[entity_key] = features_pdf.index.values
+    
     # add job_id column so we know which execution this is from if appended to predictions table
     predictions_pdf["job_id"] = context.job_id
 
@@ -65,21 +67,24 @@ def score(context: ModelContext, **kwargs):
     #     json_report CLOB(1048544000) CHARACTER SET UNICODE  -- output of
     # )
     # PRIMARY INDEX ( job_id );
+    
     predictions_pdf["json_report"] = ""
     predictions_pdf = predictions_pdf[["job_id", entity_key, target_name, "json_report"]]
+    
     print (context.dataset_info.predictions_database)
     print(context.dataset_info.predictions_table)
-    copy_to_sql(
-        df=predictions_pdf,
-        schema_name=context.dataset_info.predictions_database,
-        table_name=context.dataset_info.predictions_table,
-        index=False,
-        if_exists="append"
-    )
+    
+    
+    
+    copy_to_sql(df=predictions_pdf,
+                schema_name=context.dataset_info.predictions_database,
+                table_name=context.dataset_info.predictions_table,
+                index=False,
+                if_exists="append")
+    
     
     print("Saved predictions in Teradata")
-    print({context.dataset_info.get_predictions_metadata_fqtn()} )
-    print({context.job_id})
+
 
     #calculate stats
     #predictions_df = DataFrame.from_query(f"""
@@ -89,4 +94,4 @@ def score(context: ModelContext, **kwargs):
     #        WHERE job_id = '{context.job_id}'
     #""")
 
-    record_scoring_stats(features_df=features_tdf, predicted_df=predictions_df, context=context)
+    #record_scoring_stats(features_df=features_tdf, predicted_df=predictions_df, context=context)
