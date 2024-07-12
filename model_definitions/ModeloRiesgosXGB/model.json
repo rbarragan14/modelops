@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 {
     "id": "f8df0bec-12d1-4d2d-920f-4448503df82d",
     "name": "Modelo Riesgos" ,
     "description": "Riesgos de creditos",
     "language": "python"
 }
+=======
+{
+    "id": "f8df0bec-12d1-4d2d-920f-4448503df82d",
+    "name": "Modelo Riesgos" ,
+    "description": "Riesgos de creditos",
+    "language": "python"
+}
+>>>>>>> bca332df12e830c02a4513183c003cf8be5a285d
