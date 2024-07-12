@@ -82,11 +82,11 @@ def score(context: ModelContext, **kwargs):
     print({context.job_id})
 
     #calculate stats
-    predictions_df = DataFrame.from_query(f"""
-        SELECT 
-            * 
-        FROM {context.dataset_info.get_predictions_metadata_fqtn()} 
-            WHERE job_id = '{context.job_id}'
-    """)
+    #predictions_df = DataFrame.from_query(f"""
+    #    SELECT 
+    #        * 
+    #    FROM {context.dataset_info.get_predictions_metadata_fqtn()} 
+    #        WHERE job_id = '{context.job_id}'
+    #""")
 
     record_scoring_stats(features_df=features_tdf, predicted_df=predictions_df, context=context)
