@@ -96,9 +96,11 @@ def train(context: ModelContext, **kwargs):
     # Id del mejor modelo
 
     modelid = rs_obj.best_model_id
-    print (modelid)
-    print(rs_obj.best_score_)  # Mejor score 
-    print(rs_obj.best_params_) # Hyperparametros)
+    print("modelo:  ")
+    print("         ")
+    modelid
+    rs_obj.best_score_  # Mejor score 
+    rs_obj.best_params_ # Hyperparametros)
     #model.result.to_sql(f"model_${context.model_version}", if_exists="replace")    
     print("Saved trained model xyz")
 
