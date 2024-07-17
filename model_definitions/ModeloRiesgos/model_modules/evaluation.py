@@ -84,6 +84,7 @@ def evaluate(context: ModelContext, **kwargs):
     #)
     
     print("Scoring")
+    
     predictions = TDGLMPredict(
         object=model,
         #newdata=scaled_test.result,

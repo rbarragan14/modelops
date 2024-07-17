@@ -33,7 +33,7 @@ def train(context: ModelContext, **kwargs):
     # read training dataset from Teradata and convert to pandas
     train_df = DataFrame.from_query(context.dataset_info.sql)
 
-    print ("Scaling using InDB Functions... Rev 1234567")
+    print ("Scaling using InDB Functions... Rev 12345678")
     
     
   #  scaler.output.to_sql(f"scaler_${context.model_version}", if_exists="replace")
