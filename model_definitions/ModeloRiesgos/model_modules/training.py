@@ -35,22 +35,6 @@ def train(context: ModelContext, **kwargs):
 
     print ("Scaling using InDB Functions... Rev 1234567")
     
-    #scaler = ScaleFit(
-    #    data=train_df,
-    #    target_columns = feature_names,
-    #    scale_method = context.hyperparams["scale_method"],
-    #    miss_value = context.hyperparams["miss_value"],
-    #    global_scale = context.hyperparams["global_scale"].lower() in ["true", "1"],
-    #    multiplier = context.hyperparams["multiplier"],
-    #    intercept = context.hyperparams["intercept"]
-    #)
-
-
-    #scaled_train = ScaleTransform(
-    #    data=train_df,
-    #    object=scaler.output,
-    #    accumulate = [target_name,entity_key]
-    #)
     
   #  scaler.output.to_sql(f"scaler_${context.model_version}", if_exists="replace")
   #  print("Saved scaler")

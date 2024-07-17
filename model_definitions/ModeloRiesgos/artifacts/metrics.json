@@ -1,1 +1,1 @@
-{"Accuracy": "0.78", "Micro-Precision": "0.78", "Micro-Recall": "0.78", "Micro-F1": "0.78", "Macro-Precision": "0.73", "Macro-Recall": "0.51", "Macro-F1": "0.45", "Weighted-Precision": "0.76", "Weighted-Recall": "0.78", "Weighted-F1": "0.69"}
+{"Accuracy": "0.85", "Micro-Precision": "0.85", "Micro-Recall": "0.85", "Micro-F1": "0.85", "Macro-Precision": "0.81", "Macro-Recall": "0.69", "Macro-F1": "0.72", "Weighted-Precision": "0.84", "Weighted-Recall": "0.85", "Weighted-F1": "0.83"}
